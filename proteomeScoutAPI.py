@@ -76,9 +76,6 @@
 # ===============================================================================
 
 
-
-import pickle
-
 # Exception if file is bad
 class BadProteomeScoutFile(Exception):
     pass
