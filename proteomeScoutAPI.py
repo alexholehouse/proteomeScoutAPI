@@ -37,18 +37,18 @@
 # 1) Create the API object by loading a flat file. ProteomeScout flat files can 
 #    be obtained from https://proteomescout.wustl.edu/compendia
 #
-#    PTM_API = proteomScoutAPI.ProteomeScoutAPI('<flate filename goes here>')
+#    PTM_API = ProteomeScoutAPI('<flat filename goes here>')
 #
 # 2) Query the API object using the functions. Available functions are
 #
 #    PTM_API.get_phosphosites(ID)
 #    PTM_API.get_PTMs(ID)
-#    PTM_API.get_mutants(ID)
+#    PTM_API.get_mutations(ID)
 #
 #    For more information on these functions I suggest reading the rest of the
 #    source code, or once you've loaded an API object type
 #
-#    help(PTM_API.get_mutants)
+#    help(PTM_API.get_mutations)
 #
 # 3) The PTM_APU.uniqueKeys is a list of the unique accession numbers to provide
 #    an easy way to loop over all the unique entries. NOTE THAT IDS HAVE REDUNDANCY
@@ -65,7 +65,7 @@
 #  
 # PTM_API = ProteomeScoutAPI("proteomescout_mammalia_20140831.tsv")
 #
-# PTM_API.get_mutants(ID)
+# PTM_API.get_mutations(ID)
 #
 # PTM_API.get_PTMs(ID)
 #
@@ -230,10 +230,10 @@ class ProteomeScoutAPI:
 
         return phospho
 
-    def get_mutants(self, ID):
+    def get_mutations(self, ID):
         
         """
-        Return all mutants associated with the ID in question.
+        Return all mutations associated with the ID in question.
         
         POSTCONDITIONS:
 
@@ -254,18 +254,15 @@ class ProteomeScoutAPI:
         mutations = record["mutations"]
         if len(mutations) == 0:
             return []
-
         
         mutations_raw=mutations.split(";")
         mutations_clean=[]
-        print mutations_raw
+
         for i in mutations_raw:
-            tmp = i.strip()
-            print tmp
-            
-            
+            tmp = i.strip()            
             # append a tuple of (position, residue, type)
-            mutations_clean.append((tmp[0], tmp[1:-1], tmp[-1] ))
+            mutations_clean.append((tmp[1:-1], tmp[0], tmp[-1]))
+
         return mutations_clean
 
 
