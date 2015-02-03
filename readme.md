@@ -41,7 +41,7 @@ ProteomeScoutAPI is a Python module which can be used to connect to and parse Pr
  
     ### `get_phososphosites(<ID>)` 
     
-    This returns a list of 3-mer tuples, where each item in the list is a different phosphosite, and the three positions in each tuple associated with a phosphosite correspond to the position in the sequence, the residue being phosphorylated (Y/S/T) and the type. Note that position indexes from **1** (to maintain consistency with bioinformatics, not Python lists.
+    This returns a list of 3-mer tuples, where each item in the list is a different phosphosite, and the three positions in each tuple associated with a phosphosite correspond to the position in the sequence, the residue being phosphorylated (Y/S/T) and the type. Note that position indexes from **1** (to maintain consistency with bioinformatics, not Python lists).
     
     If the ID passed cannot be found in the database, then a `-1` value is returned.
     
