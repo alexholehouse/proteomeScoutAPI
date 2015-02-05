@@ -257,8 +257,15 @@ class ProteomeScoutAPI:
 
         for i in mutations_raw:
             tmp = i.strip()            
+            tmpArr = tmp.split(":")
+            tmp = tmpArr[0];
+            if len(tmpArr) == 2:
+                label = tmpArr[1]
+            else:
+                label = ''
+                
             # append a tuple of (position, residue, type)
-            mutations_clean.append((tmp[1:-1], tmp[0], tmp[-1]))
+            mutations_clean.append((tmp[1:-1], tmp[0], tmp[-1], label))
 
         return mutations_clean
 
