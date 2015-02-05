@@ -58,7 +58,7 @@ ProteomeScoutAPI is a Python module which can be used to connect to and parse Pr
     
     ### `get_mutations(<ID>)` 
     
-    This returns a list of 3-mer tuples, where each item in the list is a different mutation, and the three positions in each tuple associated with a mutations correspond to the position in sequence, the original residue residue type, and the new mutation residue type. Note that, as always, positions index from **1** (to maintain consistency with bioinformatics, not Python lists).
+    This returns a list of 4-mer tuples, where each item in the list is a different mutation, and the first three positions in each tuple associated with a mutations correspond to the position in sequence, the original residue residue type, and the new mutation residue type. The fourth position in the tuple is the label that is associated (e.g. pathogenic, non_pathogenic, or '')Note that, as always, positions index from **1** (to maintain consistency with bioinformatics, not Python lists).
     
     If the ID passed cannot be found in the database, then a `-1` value is returned.
     
