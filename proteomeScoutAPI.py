@@ -199,7 +199,27 @@ class ProteomeScoutAPI:
             mods_clean.append((tmp[0][1:], tmp[0][0], "-".join(tmp[1:])))
         return mods_clean
 
+    def get_species(self,ID):
+        """
+        Return the species associated with the ID in question.
+        POSTCONDITIONS:
 
+        Returns a string of the species name
+
+        Returns '-1' if unable to find the ID
+
+        Returns '' (empty list) if no species
+
+
+        """
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return '-1'
+        species = record["species"]
+        return species
+
+        
     def get_phosphosites(self,ID):
         """
         Return all phosphosites associated with the ID in question.
