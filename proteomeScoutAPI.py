@@ -249,8 +249,27 @@ class ProteomeScoutAPI:
             return '-1'
         species = record["species"]
         return species
+    
+    def get_sequence(self, ID):
+        """
+        Return the sequence associated with the ID in question.
+        POSTCONDITIONS:
 
-        
+        Returns a string of the sequence
+
+        Returns '-1' if unable to find the ID
+
+        Returns '' (empty list) if no sequence
+
+        """
+        try: 
+            record = self.database[ID]
+        except KeyError:
+            return '-1'
+        sequence = record["sequence"]
+        return sequence
+
+    
     def get_phosphosites(self,ID):
         """
         Return all phosphosites associated with the ID in question.
