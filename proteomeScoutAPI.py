@@ -198,6 +198,37 @@ class ProteomeScoutAPI:
             # append a tuple of (position, residue, type)
             mods_clean.append((tmp[0][1:], tmp[0][0], "-".join(tmp[1:])))
         return mods_clean
+    
+    def get_nearbyPTMs(self,ID,pos, window):
+        """
+        Return all PTMs associated with the ID in question that reside within
+        +/-window, relative to the designated position (pos)
+
+        POSTCONDITIONS:
+
+        Returns a list of tuples of modifications
+        [(position, residue, modification-type),...,]
+
+        Returns -1 if unable to find the ID
+
+        Returns [] (empty list) if no modifications
+        
+        """
+        mods = self.get_PTMs(ID)
+        modsInWin = []
+        if mods == -1:
+            return -1
+        elif len(mods)==0:
+            return []
+        else:
+            for m in mods:
+                site = int(m[0])
+                if site >= pos-window and site <= pos+window:
+                    modsInWin.append(m)
+
+        return modsInWin
+
+
 
     def get_species(self,ID):
         """
