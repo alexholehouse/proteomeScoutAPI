@@ -198,8 +198,78 @@ class ProteomeScoutAPI:
             # append a tuple of (position, residue, type)
             mods_clean.append((tmp[0][1:], tmp[0][0], "-".join(tmp[1:])))
         return mods_clean
+    
+    def get_nearbyPTMs(self,ID,pos, window):
+        """
+        Return all PTMs associated with the ID in question that reside within
+        +/-window, relative to the designated position (pos)
+
+        POSTCONDITIONS:
+
+        Returns a list of tuples of modifications
+        [(position, residue, modification-type),...,]
+
+        Returns -1 if unable to find the ID
+
+        Returns [] (empty list) if no modifications
+        
+        """
+        mods = self.get_PTMs(ID)
+        modsInWin = []
+        if mods == -1:
+            return -1
+        elif len(mods)==0:
+            return []
+        else:
+            for m in mods:
+                site = int(m[0])
+                if site >= pos-window and site <= pos+window:
+                    modsInWin.append(m)
+
+        return modsInWin
 
 
+
+    def get_species(self,ID):
+        """
+        Return the species associated with the ID in question.
+        POSTCONDITIONS:
+
+        Returns a string of the species name
+
+        Returns '-1' if unable to find the ID
+
+        Returns '' (empty list) if no species
+
+
+        """
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return '-1'
+        species = record["species"]
+        return species
+    
+    def get_sequence(self, ID):
+        """
+        Return the sequence associated with the ID in question.
+        POSTCONDITIONS:
+
+        Returns a string of the sequence
+
+        Returns '-1' if unable to find the ID
+
+        Returns '' (empty list) if no sequence
+
+        """
+        try: 
+            record = self.database[ID]
+        except KeyError:
+            return '-1'
+        sequence = record["sequence"]
+        return sequence
+
+    
     def get_phosphosites(self,ID):
         """
         Return all phosphosites associated with the ID in question.
@@ -268,6 +338,37 @@ class ProteomeScoutAPI:
             mutations_clean.append((tmp[1:-1], tmp[0], tmp[-1], label))
 
         return mutations_clean
+
+
+    def get_GO(self, ID):
+        """
+        Return all GO terms associated with the ID in question
+
+        POSTCONDITIONS:
+        
+        Returns a list of of GO Terms
+
+        Returns a -1 if unable to find the ID
+
+        Returns a [] (empty list) if no GO terms
+
+        """
+        
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+
+        GO_terms = record["GO_terms"]
+        if len(GO_terms)==0:
+            return []
+
+        GO_termsArr = GO_terms.split(";")
+        GO_terms_clean = []
+        for i in GO_termsArr:
+            GO_terms_clean.append(i.strip())
+
+        return GO_terms_clean
 
 
     
