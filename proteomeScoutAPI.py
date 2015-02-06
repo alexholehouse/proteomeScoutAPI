@@ -340,6 +340,37 @@ class ProteomeScoutAPI:
         return mutations_clean
 
 
+    def get_GO(self, ID):
+        """
+        Return all GO terms associated with the ID in question
+
+        POSTCONDITIONS:
+        
+        Returns a list of of GO Terms
+
+        Returns a -1 if unable to find the ID
+
+        Returns a [] (empty list) if no GO terms
+
+        """
+        
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+
+        GO_terms = record["GO_terms"]
+        if len(GO_terms)==0:
+            return []
+
+        GO_termsArr = GO_terms.split(";")
+        GO_terms_clean = []
+        for i in GO_termsArr:
+            GO_terms_clean.append(i.strip())
+
+        return GO_terms_clean
+
+
     
                 
 
