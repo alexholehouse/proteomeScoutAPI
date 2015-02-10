@@ -199,6 +199,48 @@ class ProteomeScoutAPI:
             mods_clean.append((tmp[0][1:], tmp[0][0], "-".join(tmp[1:])))
         return mods_clean
     
+    def get_domains(self, ID, domain_type):
+        """
+        Return all domains associated with the ID in question.
+        For pfam domains domain_type is 'pfam'
+        For UniProt domains domain_type is 'uniprot'
+
+        POSTCONDITIONS:
+
+        Returns a list of tuples of domains 
+        [(domain_name, start_position, end_position),...,]
+        
+        Returns -1 if unable to find the ID
+        Returns -2 if the domain argument is unrecognized 
+
+        Returns [] (empty list) if no modifications        
+
+        """
+        
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+        domain_type = domain_type.lower()
+        if domain_type == 'pfam':
+            doms = record["pfam_domains"]
+        elif domain_type == 'uniprot':
+            doms = record["uniprot_domains"]
+        else:
+            print "%s is an unrecognized domain type. Use 'pfam' or 'uniprot'"%(domain_type)
+            return -2
+        
+        doms_raw=doms.split(";")
+        doms_clean =[]
+        for i in doms_raw:
+            tmp = i.strip()
+            tmp = tmp.split(":")
+            name = tmp[0]
+            tmp = tmp[1].split("-")
+            doms_clean.append((name, tmp[0], tmp[1]))
+        return doms_clean
+          
+
     def get_nearbyPTMs(self,ID,pos, window):
         """
         Return all PTMs associated with the ID in question that reside within
