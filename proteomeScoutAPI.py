@@ -213,7 +213,6 @@ class ProteomeScoutAPI:
         [(domain_name, start_position, end_position),...,]
         
         Returns -1 if unable to find the ID
-        Returns -2 if the domain argument is unrecognized 
 
         Returns [] (empty list) if no modifications        
 
@@ -243,7 +242,8 @@ class ProteomeScoutAPI:
                     tmp = sites.split("-")
                     doms_clean.append((name, tmp[0], tmp[1]))
                 else:
-                    doms_clean.append((name, -1, -1))
+                    print "ERROR: the domain did not match expected %s"%(i)
+                    #doms_clean.append((tmp, -1, -1))
         return doms_clean
           
 
