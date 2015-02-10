@@ -208,6 +208,8 @@ class ProteomeScoutAPI:
         POSTCONDITIONS:
 
         Returns a list of tuples of domains 
+        if there is a problem with the start and end position, these will be
+        returned as -1
         [(domain_name, start_position, end_position),...,]
         
         Returns -1 if unable to find the ID
@@ -233,11 +235,15 @@ class ProteomeScoutAPI:
         doms_raw=doms.split(";")
         doms_clean =[]
         for i in doms_raw:
-            tmp = i.strip()
-            tmp = tmp.split(":")
-            name = tmp[0]
-            tmp = tmp[1].split("-")
-            doms_clean.append((name, tmp[0], tmp[1]))
+            if i:
+                tmp = i.strip()
+                tmp = tmp.split(":")
+                if len(tmp)>=2:
+                    name, sites = tmp
+                    tmp = sites.split("-")
+                    doms_clean.append((name, tmp[0], tmp[1]))
+                else:
+                    doms_clean.append((name, -1, -1))
         return doms_clean
           
 
