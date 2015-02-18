@@ -7,8 +7,12 @@
 # 
 # February 2015 
 #
-# By Alex Holehouse, Washington University in St. Louis [Pappu Lab]
+# By Alex Holehouse and Dr. Kristen Naegle
+# Washington University in St. Louis 
+#
 # Contact alex.holehouse@gmail.com or https://github.com/alexholehouse
+#
+#
 #
 #
 #
