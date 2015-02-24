@@ -349,31 +349,38 @@ class ProteomeScoutAPI:
         
         """
         Return all mutations associated with the ID in question.
+        Returns all mutation_annotations associated with those mutations
+        [mutations, mutations_annotations] = PTM_API.get_mutations(ID)
         
         POSTCONDITIONS:
 
-        Returns a list of tuples of phosphosites
+        Returns a list of tuples of mutations 
         [(original residue, position, new residue),...,]
         
-        Returns -1 if unable to find the ID
+        Returns -1, -1 if unable to find the ID
 
-        Returns [] (empty list) if no mutations        
+        Returns [],[] (empty list) if no mutations        
 
         """
         
         try:
             record = self.database[ID]
         except KeyError:
-            return -1
+            return (-1,-1)
 
         mutations = record["mutations"]
+        mutations_ann = record["mutation_annotations"]
         if len(mutations) == 0:
-            return []
+            return ([],[])
         
         mutations_raw=mutations.split(";")
         mutations_clean=[]
+        mutations_ann_raw = mutations_ann.split("|")
+        mutations_ann_clean = []
+        if len(mutations_raw) != len(mutations_ann_raw):
+            print "Error: Not the same number of annotations (%d) and mutations (%d)\n"%(len(mutations_ann_raw), len(mutations_raw))
 
-        for i in mutations_raw:
+        for idx, i in enumerate(mutations_raw):
             tmp = i.strip()            
             tmpArr = tmp.split(":")
             tmp = tmpArr[0];
@@ -384,8 +391,9 @@ class ProteomeScoutAPI:
                 
             # append a tuple of (position, residue, type)
             mutations_clean.append((tmp[1:-1], tmp[0], tmp[-1], label))
+            mutations_ann_clean.append(mutations_ann_raw[idx].strip())
 
-        return mutations_clean
+        return (mutations_clean, mutations_ann_clean)
 
 
     def get_GO(self, ID):
