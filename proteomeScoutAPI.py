@@ -357,6 +357,7 @@ class ProteomeScoutAPI:
         [(original residue, position, new residue, annotation),...,]
         
         Returns -1 if unable to find the ID
+        Returns -2 if the number of mutations and annotations do not match
 
         Returns [] (empty list) if no mutations        
 
@@ -377,6 +378,7 @@ class ProteomeScoutAPI:
         mutations_ann_raw = mutations_ann.split("|")
         if len(mutations_raw) != len(mutations_ann_raw):
             print "Error: Not the same number of annotations (%d) and mutations (%d)\n"%(len(mutations_ann_raw), len(mutations_raw))
+            return -2
 
         for idx, i in enumerate(mutations_raw):
             tmp = i.strip()            
