@@ -1,12 +1,13 @@
 #**ProteomeScoutAPI**
-THIS IS HOSTED ON ASSEMBLA AT: https://www.assembla.com/spaces/proteomescout/wiki
+##THIS IS HOSTED ON ASSEMBLA AT: https://www.assembla.com/spaces/proteomescout/wiki
+### Please see here for the official *stable* release, relevant documentation, background info etc. 
 
 A lightweight API to talk to ProteomeScout flatfiles in Python. 
 
 # about
-Version 1.4 - November 2015 
+Version 1.4-DEV - November 2015 
 
-By Alex Holehouse, WasBy Alex Holehouse, Washington University in St. Louis ([Pappu Lab](http://pappulab.wustl.edu/)) and Kristen Naegle ([Naegle lab](http://naegle.wustl.edu/)).
+ProteomeScoutAPI was written by Alex Holehouse, Washington University in St. Louis ([Pappu Lab](http://pappulab.wustl.edu/)) and Kristen Naegle ([Naegle lab](http://naegle.wustl.edu/)).
 
 Contact alex.holehouse@gmail.com or contribute at [https://github.com/alexholehouse](https://github.com/alexholehouse)
 
