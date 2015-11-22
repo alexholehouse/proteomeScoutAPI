@@ -1,6 +1,5 @@
 #**ProteomeScoutAPI**
-##THIS IS HOSTED ON ASSEMBLA AT: https://www.assembla.com/spaces/proteomescout/wiki
-### Please see here for the official *stable* release, relevant documentation, background info etc. 
+#### ProteomScoutAPI IS HOSTED ON ASSEMBLA AT: https://www.assembla.com/spaces/proteomescout/wiki - please see here for the official *stable* release, relevant documentation, background info etc. 
 
 A lightweight API to talk to ProteomeScout flatfiles in Python. 
 
