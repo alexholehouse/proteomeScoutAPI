@@ -5,7 +5,7 @@
 # ===============================================================================
 # Version 1.4
 # 
-# September 2015 
+# November 2015 
 #
 # By Alex Holehouse, Washington University in St. Louis 
 # Contact alex.holehouse@gmail.com or https://github.com/alexholehouse
