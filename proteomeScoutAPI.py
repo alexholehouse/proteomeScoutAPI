@@ -3,9 +3,9 @@
 # ===============================================================================
 # ABOUT
 # ===============================================================================
-# Version 1.4
+# Version 1.5
 # 
-# November 2015 
+# January 2016 
 #
 # By Alex Holehouse, Washington University in St. Louis 
 # Contact alex.holehouse@gmail.com or https://github.com/alexholehouse
@@ -156,7 +156,7 @@ class ProteomeScoutAPI:
             # dataset more columns are added you coulded extend this
             # here
             OBJ={}
-            for i in xrange(2,19):
+            for i in xrange(1,19):
                 OBJ[headers[i]] = record[i]
 
 
@@ -426,7 +426,7 @@ class ProteomeScoutAPI:
 
         POSTCONDITIONS:
         
-        Returns a list of of GO Terms
+        Returns a list of GO Terms
 
         Returns a -1 if unable to find the ID
 
@@ -449,6 +449,34 @@ class ProteomeScoutAPI:
             GO_terms_clean.append(i.strip())
 
         return GO_terms_clean
+
+    def get_accessions(self,ID):
+        """
+        Return a list of accessions associated with the protein
+
+        POSTCONDITIONS:
+        
+        Returns a list of the protein's accessions
+
+        Returns a -1 if unable to find the ID
+
+        """
+
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+
+        raw_accessions   = record['accessions']
+        split_accessions = raw_accessions.split(';')
+
+        acc_list = []
+        for acc in split_accessions:
+            acc_list.append(acc.strip())
+
+        return(acc_list)
+
+
 
 
     

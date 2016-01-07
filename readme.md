@@ -4,7 +4,7 @@
 A lightweight API to talk to ProteomeScout flatfiles in Python. 
 
 # about
-Version 1.4-DEV - November 2015 
+Version 1.5 - January 2016
 
 ProteomeScoutAPI was written by Alex Holehouse, Washington University in St. Louis ([Pappu Lab](http://pappulab.wustl.edu/)) and Kristen Naegle ([Naegle lab](http://naegle.wustl.edu/)).
 
@@ -65,6 +65,14 @@ ProteomeScoutAPI is a Python module which can be used to connect to and parse Pr
     If the ID passed as no mutants associated with it, then an empty list  (`[]`)is returned
 
 
+    ### `get_accessions(<ID>)'
+    
+    This returns a list of the accessions associated with a given protein. This should not be consdered an exhaustative list of accessions, but is the list based on all the resources ProteomeScout uses to construct its database.
+    
+    If the ID passed cannot be found in the database, then a `-1` value is returned.
+    
+
+    ### `uniqueKeys 
 
     The `uniqueKeys` is a list of the unique accession numbers to provide an easy way to loop over all the unique entries. 
     

@@ -42,5 +42,10 @@ class TestFunctions(unittest.TestCase):
 
     def test_get_species(self):
         self.assertEqual('homo sapiens', self.API.get_species('117210'))
+        
+    def test_get_accession(self):
+        self.assertEqual(True, 'O00629' in self.API.get_accessions('D3DNM2'))
+        self.assertEqual(-1, self.API.get_accessions('D3DNM1'))
+        self.assertEqual(True, 'C8V1J9' in self.API.get_accessions('P38091.3'))
 
         
