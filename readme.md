@@ -65,14 +65,14 @@ ProteomeScoutAPI is a Python module which can be used to connect to and parse Pr
     If the ID passed as no mutants associated with it, then an empty list  (`[]`)is returned
 
 
-    ### `get_accessions(<ID>)'
+    ### `get_accessions(<ID>)`
     
     This returns a list of the accessions associated with a given protein. This should not be consdered an exhaustative list of accessions, but is the list based on all the resources ProteomeScout uses to construct its database.
     
     If the ID passed cannot be found in the database, then a `-1` value is returned.
     
 
-    ### `uniqueKeys 
+    ### `uniqueKeys`
 
     The `uniqueKeys` is a list of the unique accession numbers to provide an easy way to loop over all the unique entries. 
     
