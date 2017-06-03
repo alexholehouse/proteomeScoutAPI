@@ -80,6 +80,9 @@
 class BadProteomeScoutFile(Exception):
     pass
 
+class ProteomeScoutAPIBug(Exception):
+    pass
+
 
 class ProteomeScoutAPI:
 
@@ -96,6 +99,7 @@ class ProteomeScoutAPI:
         self.__checkFile(filename)
         
         self.__buildAPI(filename)
+
 
     def __checkFile(self, filename):
         """
@@ -205,7 +209,7 @@ class ProteomeScoutAPI:
         Returns [] (empty list) if no modifications        
 
         """
-        
+                
         try:
             record = self.database[ID]
         except KeyError:
@@ -475,6 +479,61 @@ class ProteomeScoutAPI:
             acc_list.append(acc.strip())
 
         return(acc_list)
+
+
+    def get_evidence_per_site(self, ID):
+        """
+        Returns a list of PTMs with the number of different evidence sources
+        included on a per-PTM basis
+
+        """
+        
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+    
+
+        evidence_per_PTM = [len(x.split(',')) for x in record['evidence'].split(';')]
+        PTMs = self.get_PTMs(ID)
+
+        num_evidence = len(evidence_per_PTM)
+        num_PTMs     = len(PTMs)
+        
+        if num_evidence != num_PTMs:
+            raise ProteomeScoutAPIBug("While trying to determine evidence-per-PTM we obtained a mismatch in the data. Please report this along with the ID [%s] to alex.holehouse@wustl.edu" % (ID))
+
+        PTMs_with_evidence = []
+        for PTMIDX in xrange(0, num_PTMs):
+            PTMs_with_evidence.append([PTMs[PTMIDX][0], PTMs[PTMIDX][1], PTMs[PTMIDX][2], evidence_per_PTM[PTMIDX]])
+
+        return PTMs_with_evidence
+
+    def get_protein_name(self, ID, first_name_only=True):
+        """
+        Returns a list of PTMs with the number of different evidence sources
+        included on a per-PTM basis
+
+        """
+        try:
+            record = self.database[ID]
+        except KeyError:
+            return -1
+
+        if first_name_only:
+            return record['protein_name'].split(';')[0]
+        else:
+            return record['protein_name']
+        
+            
+                                    
+            
+            
+
+            
+            
+
+        
 
 
 
